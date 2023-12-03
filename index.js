@@ -75,6 +75,16 @@ const display= {
       this.elementShow("choice" + i, choices[i])
       guessHandler('guess' + i, choices[i])
     }
+  },
+  progress: function(){
+    this.elementShow("progress",`Question ${quiz.currentQuestionIndex +1} sur ${quiz.questions.length}`)
+  },
+  endQuiz:function(){
+    let endQuizHTML=`
+      <h1>quiz terminé ! </h1>
+      <h3> votre score est de : ${quiz.score} / ${quiz.questions.length}</h3>
+    `
+    this.elementShow("quiz" , endQuizHTML)
   }
 }
 
@@ -83,10 +93,12 @@ const display= {
 
 quizApp=()=>{
   if (quiz.hasEnded()) {
-    // ecran de fin
+    display.endQuiz()
+
   }else{
     display.question();
     display.choices()
+    display.progress()
   }
 }
 
